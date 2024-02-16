@@ -4,6 +4,7 @@ import toast,{ Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { checkDob, checkEmail, checkName } from '../../utils/validate';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../utils/constants';
 const UserForm = () => {
     const navigate = useNavigate();
     const [name,setName] = useState();
@@ -12,6 +13,10 @@ const UserForm = () => {
     const [phone,setPhone] = useState();
     const handleSubmit = async()=>{
         const data = {name,dob,email,phone};
+        if(!name || !dob || !email){
+            toast.error("Please fill all the fields");
+            return;
+        }
         const validName = checkName(name);
         const validEmail = checkEmail(email);
         const validDob = checkDob(dob);
@@ -30,7 +35,7 @@ const UserForm = () => {
        }
        
         try {
-            const response = await axios.post("http://localhost:3002/add",data);
+            const response = await axios.post(`${BASE_URL}/add`,data);
             console.log(response);
             toast.success(response?.data?.message);
             navigate('/dashboard');

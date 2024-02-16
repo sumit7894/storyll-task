@@ -10,7 +10,6 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/users`);
-        console.log(response.data);
         setInfo(response.data.data); 
       } catch (error) {
         console.error('Error fetching data:', error);
