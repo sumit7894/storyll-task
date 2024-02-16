@@ -3,7 +3,9 @@ import styles from './userform.module.css'
 import toast,{ Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { checkDob, checkEmail, checkName } from '../../utils/validate';
+import { useNavigate } from 'react-router-dom';
 const UserForm = () => {
+    const navigate = useNavigate();
     const [name,setName] = useState();
     const [dob,setDob] = useState();
     const [email,setEmail] = useState();
@@ -31,6 +33,7 @@ const UserForm = () => {
             const response = await axios.post("http://localhost:3002/add",data);
             console.log(response);
             toast.success(response?.data?.message);
+            navigate('/dashboard');
         } catch (error) {
             console.log(error);
             setTimeout(()=>{
