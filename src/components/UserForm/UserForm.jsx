@@ -20,7 +20,6 @@ const UserForm = () => {
         const validName = checkName(name);
         const validEmail = checkEmail(email);
         const validDob = checkDob(dob);
-        console.log("this is dob validation",validDob)
        if(!validName){
         toast.error("Invalid Name")
         return;
